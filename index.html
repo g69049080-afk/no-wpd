@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No WPD Userscript</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0d1117;
+        font-family: Arial, sans-serif;
+        color: white;
+        padding: 20px;
+    }
+
+    .container {
+        width: min(900px, 100%);
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        background: #21262d;
+        border-bottom: 1px solid #30363d;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+    }
+
+    .dots {
+        display: flex;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #555;
+    }
+
+    .filename {
+        color: #8b949e;
+        font-size: 14px;
+    }
+
+    .copy-btn {
+        border: none;
+        border-radius: 8px;
+        padding: 9px 15px;
+        background: #238636;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .copy-btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.15);
+    }
+
+    .copy-btn:active {
+        transform: scale(0.96);
+    }
+
+    .code-wrapper {
+        padding: 20px;
+        overflow-x: auto;
+    }
+
+    pre {
+        margin: 0;
+        color: #c9d1d9;
+        font-family: Consolas, monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        white-space: pre;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="title">
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <span class="filename">No WPD.user.js</span>
+        </div>
+
+        <button class="copy-btn" onclick="copyCode()">
+            Copy
+        </button>
+
+    </div>
+
+    <div class="code-wrapper">
+        <pre id="code">// ==UserScript==
+// @name        No WPD
+// @namespace   Violentmonkey Scripts
+// @version     1.1.0
+// @match       https://watchpeopledie.tv/*
+// @grant       none
+// @creator     Y_scripts
+// @description Hide images and provide a button to blank the page
+// ==/UserScript==
+
+let style = document.createElement("style");
+
+style.innerHTML = `
+    img {
+        display: none !important;
+    }
+`;
+
+document.head.appendChild(style);
+
+let button = document.createElement("button");
+
+button.innerText = "Blank page";
+
+button.style.position = "fixed";
+button.style.top = "20px";
+button.style.right = "20px";
+button.style.width = "180px";
+button.style.height = "70px";
+button.style.fontSize = "24px";
+button.style.zIndex = "999999";
+
+button.onclick = function() {
+    document.body.innerHTML = "";
+};
+
+document.body.appendChild(button);</pre>
+    </div>
+
+</div>
+
+<script>
+function copyCode() {
+    const code = document.getElementById("code").innerText;
+    const button = document.querySelector(".copy-btn");
+
+    navigator.clipboard.writeText(code).then(() => {
+        button.innerText = "Copied!";
+
+        setTimeout(() => {
+            button.innerText = "Copy";
+        }, 1500);
+    });
+}
+</script>
+
+</body>
+</html>
