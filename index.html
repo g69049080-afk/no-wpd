@@ -26,7 +26,50 @@
         width: min(900px, 100%);
     }
 
-    /* Animated title */
+    .update-box {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 14px;
+        padding: 18px 22px;
+        margin-bottom: 22px;
+        text-align: center;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+
+        animation: slideDown 0.7s ease-out;
+    }
+
+    .update-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    .update-text {
+        color: #8b949e;
+        font-size: 14px;
+    }
+
+    .discord-link {
+        color: #58a6ff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .discord-link:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-25px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
     .main-title {
         text-align: center;
@@ -163,6 +206,23 @@
 
 <div class="page">
 
+    <div class="update-box">
+        <div class="update-title">
+            🚀 UserScript updated!
+        </div>
+
+        <div class="update-text">
+            For our official Discord server:
+            <a
+                class="discord-link"
+                href="https://discord.gg/vCqEqCfdt2"
+                target="_blank"
+            >
+                discord.gg/vCqEqCfdt2
+            </a>
+        </div>
+    </div>
+
     <h1 class="main-title">
         Y_Scripts No WPD Script
     </h1>
@@ -198,40 +258,27 @@
             <pre id="code">// ==UserScript==
 // @name        No WPD
 // @namespace   Violentmonkey Scripts
-// @version     1.1.0
+// @version     1.1.2
 // @match       https://watchpeopledie.tv/*
 // @grant       none
-// @creator     Y_scripts
-// @description Hide images and provide a button to blank the page
+// @author      Y_scripts
+// @description Makes the site blank. By using it you agree to our TOS.
 // ==/UserScript==
 
-let style = document.createElement("style");
+document.body.innerHTML = "";
 
-style.innerHTML = `
-    img {
-        display: none !important;
-    }
-`;
+const button = document.createElement("button");
 
-document.head.appendChild(style);
+button.textContent = "Successfully blocked";
 
-let button = document.createElement("button");
+button.style.display = "block";
+button.style.margin = "50px auto";
+button.style.fontSize = "40px";
+button.style.padding = "30px 70px";
 
-button.innerText = "Blank page";
+document.body.appendChild(button);
 
-button.style.position = "fixed";
-button.style.top = "20px";
-button.style.right = "20px";
-button.style.width = "180px";
-button.style.height = "70px";
-button.style.fontSize = "24px";
-button.style.zIndex = "999999";
-
-button.onclick = function() {
-    document.body.innerHTML = "";
-};
-
-document.body.appendChild(button);</pre>
+alert("worked, join our discord to support us: https://discord.gg/vCqEqCfdt2");</pre>
 
         </div>
 
