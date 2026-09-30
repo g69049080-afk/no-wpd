@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>No WPD Userscript</title>
+<title>Y_Scripts No WPD</title>
 
 <style>
     * {
@@ -22,8 +22,66 @@
         padding: 20px;
     }
 
-    .container {
+    .page {
         width: min(900px, 100%);
+    }
+
+    /* Animated title */
+
+    .main-title {
+        text-align: center;
+        margin-bottom: 28px;
+        font-size: clamp(32px, 6vw, 58px);
+        font-weight: 900;
+        letter-spacing: 2px;
+
+        background: linear-gradient(
+            90deg,
+            #ffffff,
+            #8b949e,
+            #ffffff,
+            #58a6ff,
+            #ffffff
+        );
+
+        background-size: 300% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        animation: titleGlow 5s linear infinite,
+                   titleFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+        0% {
+            background-position: 0% center;
+        }
+
+        100% {
+            background-position: 300% center;
+        }
+    }
+
+    @keyframes titleFloat {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #8b949e;
+        margin-top: -18px;
+        margin-bottom: 24px;
+        font-size: 14px;
+    }
+
+    .container {
         background: #161b22;
         border: 1px solid #30363d;
         border-radius: 16px;
@@ -103,28 +161,41 @@
 
 <body>
 
-<div class="container">
+<div class="page">
 
-    <div class="header">
+    <h1 class="main-title">
+        Y_Scripts No WPD Script
+    </h1>
 
-        <div class="title">
-            <div class="dots">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-
-            <span class="filename">No WPD.user.js</span>
-        </div>
-
-        <button class="copy-btn" onclick="copyCode()">
-            Copy
-        </button>
-
+    <div class="subtitle">
+        A simple browser userscript
     </div>
 
-    <div class="code-wrapper">
-        <pre id="code">// ==UserScript==
+    <div class="container">
+
+        <div class="header">
+
+            <div class="title">
+
+                <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <span class="filename">No WPD.user.js</span>
+
+            </div>
+
+            <button class="copy-btn" onclick="copyCode()">
+                Copy
+            </button>
+
+        </div>
+
+        <div class="code-wrapper">
+
+            <pre id="code">// ==UserScript==
 // @name        No WPD
 // @namespace   Violentmonkey Scripts
 // @version     1.1.0
@@ -161,22 +232,29 @@ button.onclick = function() {
 };
 
 document.body.appendChild(button);</pre>
+
+        </div>
+
     </div>
 
 </div>
 
 <script>
 function copyCode() {
+
     const code = document.getElementById("code").innerText;
     const button = document.querySelector(".copy-btn");
 
     navigator.clipboard.writeText(code).then(() => {
+
         button.innerText = "Copied!";
 
         setTimeout(() => {
             button.innerText = "Copy";
         }, 1500);
+
     });
+
 }
 </script>
 
